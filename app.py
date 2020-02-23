@@ -19,11 +19,14 @@ def show_front():
             smartmonkey.Newpop(request.args.get('num_monkeys'))
             smartmonkey.NewGoal(request.args.get('mutation'))
             smartmonkey.NewNgram(request.args.get('interval'))
+            work = smartmonkey.NewGoal(request.args.get('text'))
 
-            result = smartmonkey.result
-            print("Ayyyyyyyyyyyyyyyyy")
+            print(work)
+
+            result = smartmonkey.retres()
             print(result)
             print(result)
+            
             
             return render_template('front.html', d = result)
     
