@@ -152,6 +152,19 @@ class Individual():
             "".join(population[0].chromosome), 
             population[0].fitness)) 
   
+    def Newpop(new):
+        Pop=new
+
+    def NewGoal(new):
+        Goal=new
+        
+    def Newcross(new):
+        crossOver=new
+    
+    def NewNgram(new):
+        PNPrint=new
+        
+  
 if __name__ == '__main__': 
     Pop = input("how many monkies can you afford? (big = better)")
     Goal = input("what you wanna out of the monkeys fir (some txt)")
