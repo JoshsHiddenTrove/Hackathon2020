@@ -16,15 +16,10 @@ NPrint=2
     
 class Individual(): 
     #Class representing individual in population 
-    def __init__(self,chromo,nGen=1,cFactor=.5,mutationF = .10,userString = "HelloWorld",pop = 500): 
+    def __init__(self,chromo): 
         self.chromosome = chromo  
         self.fitness = self.cal_fitness()
-        self.fitness = self.cal_fitness()
-        self.nPrint = nGen
-        self.CrossoverFactor =cFactor
-        self.mutationFactor=1-mutationF
-        self.goalState=userString
-        self.populationSize = pop
+
 
     
     def setMutationFactor(self,newM):
@@ -72,11 +67,11 @@ class Individual():
             prob = random.random() 
   
             # insert gene from parent 1  
-            if prob < self.CrossoverFactor/2: 
+            if prob < crossOver/2: 
                 child_chromosome.append(gp1) 
   
             # insert gene from parent 2 
-            elif prob < self.CrossoverFactor: 
+            elif prob < crossOver: 
                 child_chromosome.append(gp2) 
   
             # otherwise insert random gene(mutate),  
@@ -106,7 +101,7 @@ class Individual():
         population = [] 
 
         # create initial population 
-        for _ in range(self.populationSize): 
+        for _ in range(Pop): 
                     gnome = self.create_gnome() 
                     population.append(Individual(gnome)) 
 
@@ -128,12 +123,12 @@ class Individual():
 
             # Perform Elitism, that mean 10% of fittest population 
             # goes to the next generation 
-            s = int((10*self.populationSize)/100) 
+            s = int((10*Pop)/100) 
             new_generation.extend(population[:s]) 
 
             # From 50% of fittest population, Individuals  
             # will mate to produce offspring 
-            s = int((90*self.populationSize)/100) 
+            s = int((90*Pop)/100) 
             for _ in range(s): 
                 parent1 = random.choice(population[:50]) 
                 parent2 = random.choice(population[:50]) 
@@ -152,6 +147,7 @@ class Individual():
             "".join(population[0].chromosome), 
             population[0].fitness)) 
   
+
     def Newpop(new):
         Pop=new
 
@@ -164,9 +160,8 @@ class Individual():
     def NewNgram(new):
         PNPrint=new
         
-  
 if __name__ == '__main__': 
-    Pop = input("how many monkies can you afford? (big = better)")
+    Pop = int(input("how many monkies can you afford? (big = better)"))
     Goal = input("what you wanna out of the monkeys fir (some txt)")
     crossover = input("How colaborative are the monkies?(0.01 to 0.99)")
     crossOver = 1-float(crossover)
@@ -174,6 +169,3 @@ if __name__ == '__main__':
     NPrint=int(np)
     f=Individual("test")
     f.main() 
-
-
-
