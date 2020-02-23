@@ -1,13 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
-
-
 import random
-
-
-# In[27]:
 
 
 Genes = '''abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890, .-;:_!"#%&/()=?@${[]}'''
@@ -171,16 +162,5 @@ def main():
   
 if __name__ == '__main__': 
     main() 
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 
