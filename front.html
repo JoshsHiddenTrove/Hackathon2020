@@ -37,8 +37,7 @@
 <style>
   .slidecontainer {
     
-width: 100%;
-
+    width: 100%;
     padding: 5%
   }
 .slider {
@@ -77,88 +76,83 @@ width: 100%;
 </style>
 
 
-<div class="row">
-    <div class = "column">
-        <form>
-        <div class="form-group">
-            <textarea class="form-control" rows = 15 style = width:100% placeholder = "Enter text for monkey to type" id="input" name="text"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" id = "submit">Submit</button>
-
-    </div>
-    <script>
-      function repeat()
-      {
-        document.getElementById('output').value = document.getElementById('input').value
-      }
-    </script>
 
     
-
-    <div class = "column">
-            <div class="form-group">     
-                <textarea disabled = "disabled" class="form-control" rows = 15 style = width:100% id="output"></textarea>
-
-    
-            </div>
-            <div class="slidecontainer">
-              <input type="range" min="50" max="50000" value="25000" class="slider" name="num_monkeys">
-              <p>Number of Monkeys: <span id="demo3"></span></p>
-          </div>
-          
-          <script>
-              var slider3 = document.getElementByName("num_monkeys");
-              var output3 = document.getElementById("demo3");
-              output3.innerHTML = slider3.value;
-              
-              slider3.oninput = function() {
-                  output3.innerHTML = this.value;
-              }
-          </script>
-          
-          <div class = "row">
-              <div class = "column">
-                   <div class="slidecontainer">
-                      <input type="range" min=".1" max=".5" value=".25" step=".01" class="slider" name="mutation">
-                      <p>Mutation Factore: <span id="demo"></span></p>
-                   </div>
-                
-                  <script>
-                      var slider = document.getElementByName("mutation");
-                      var output = document.getElementById("demo");
-                      output.innerHTML = slider.value;
-                
-                      slider.oninput = function() {
-                      output.innerHTML = this.value;
-                      }
-                </script>
-              </div>
-          
-              <div class = "column">
-                  <div class="slidecontainer">
-                      <input type="range" min="1" max="1000" value="10" class="slider" name="interval">
-                      <p>Progress Interval (Generations): <span id="demo2"></span></p>
-                  </div>
-              
-                  <script>
-                      var slider2 = document.getElementByName("interval");
-                      var output2 = document.getElementById("demo2");
-                      output2.innerHTML = slider2.value;
-                      
-                      slider2.oninput = function() {
-                          output2.innerHTML = this.value;
-                      }
-                 </script>
-              </div>
-          </div>
-        </form>
-    </div>
+<form>
+<div class="column">
+<div class="form-group">
+    <textarea class="form-control" rows = 15 style = width:100% placeholder = "Enter text for monkey to type" id="input" name="text"></textarea>
+</div>
+</div>
+<div class="column">
+<div class="form-group">     
+    <textarea disabled = "disabled" class="form-control" rows = 15 style = width:100% id="output"></textarea>
+</div>
 </div>
 
+<div class="column">
+<button type="submit" class="btn btn-primary" id = "submit" onclick="repeat()">Submit</button>
+
+    
+<script>
+    function repeat()
+    {
+        document.getElementById('output').value = document.getElementById('input').value
+    }
+</script>
+</div>
+
+    
+    <div class="slidecontainer">
+        <input type="range" min="50" max="50000" value="25000" class="slider" name="num_monkeys" id="num_monkeys">
+            <p>Number of Monkeys: <span id="demo3"></span></p>
+    </div>      
+    <script>
+        var slider3 = document.getElementById("num_monkeys");
+        var output3 = document.getElementById("demo3");
+        output3.innerHTML = slider3.value;
+              
+        slider3.oninput = function() {
+            output3.innerHTML = this.value;
+        }
+    </script>
+          
+    
+        <div class = "column">
+            <div class="slidecontainer">
+                <input type="range" min=".1" max=".5" value=".25" step=".01" class="slider" name="mutation" id="mutation">
+                <p>Mutation Factore: <span id="demo"></span></p>
+            </div>
+                
+            <script>
+                var slider = document.getElementById("mutation");
+                var output = document.getElementById("demo");
+                output.innerHTML = slider.value;
+                
+                slider.oninput = function() {
+                    output.innerHTML = this.value;
+                }
+            </script>
+        </div>
+          
+        <div class = "column">
+            <div class="slidecontainer">
+                <input type="range" min="1" max="1000" value="500" class="slider" name="interval" id="interval">
+                    <p>Progress Interval (Generations): <span id="demo2"></span></p>
+            </div>
+              
+            <script>
+                var slider2 = document.getElementById("interval");
+                var output2 = document.getElementById("demo2");
+                output2.innerHTML = slider2.value;
+                      
+                slider2.oninput = function() {
+                    output2.innerHTML = this.value;
+                }
+            </script>
+        </div>
+</form>
 
 
-
-
-
-  </body>
-  </html>
+</body>
+</html>
