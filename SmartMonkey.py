@@ -91,7 +91,13 @@ class Individual():
         for gs, gt in zip(self.chromosome, Goal): 
             if gs != gt: fitness+= 1
         return fitness 
-  
+    
+    def nPrint(self,population,generation):
+        print("inpop")
+        if(generation % NPrint == 0):
+            return "Generation:", generation,"Monkies so far ","".join(population[0].chromosome), "Fitness: ",population[0].fitness,"/",len(Goal)
+        
+        
 # Driver code 
     def main(self):   
         #current generation 
@@ -136,9 +142,9 @@ class Individual():
                 new_generation.append(child) 
 
             population = new_generation 
+            self.nPrint(population,generation)
             if(generation % NPrint == 0):
                 print("Generation:", generation,"Monkies so far ","".join(population[0].chromosome), "Fitness: ",population[0].fitness,"/",len(Goal))
-
             generation += 1
 
 
@@ -161,11 +167,11 @@ class Individual():
         PNPrint=new
         
 if __name__ == '__main__': 
-    Pop = int(input("how many monkies can you afford? (big = better)"))
-    Goal = input("what you wanna out of the monkeys fir (some txt)")
-    crossover = input("How colaborative are the monkies?(0.01 to 0.99)")
-    crossOver = 1-float(crossover)
-    np = input("how often should you check up on the monkies?(some int)")
-    NPrint=int(np)
+    #Pop = int(input("how many monkies can you afford? (big = better)"))
+    #Goal = input("what you wanna out of the monkeys fir (some txt)")
+    #crossover = input("How colaborative are the monkies?(0.01 to 0.99)")
+    #crossOver = 1-float(crossover)
+    #np = input("how often should you check up on the monkies?(some int)")
+    #NPrint=int(np)
     f=Individual("test")
     f.main() 
