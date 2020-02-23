@@ -111,7 +111,8 @@ class Individual():
                     population.append(Individual(gnome)) 
 
         while not found: 
-
+            if(generation == 25*NPrint):
+                break
             # sort the population in increasing order of fitness score 
             population = sorted(population, key = lambda x:x.fitness) 
 
@@ -140,11 +141,8 @@ class Individual():
                 new_generation.append(child) 
 
             population = new_generation 
-            if(generation % self.nPrint == 0):
-                print("Generation: {}\tString: {}\tFitness: {}". 
-                      format(generation, 
-                      "".join(population[0].chromosome), 
-                      population[0].fitness)) 
+            if(generation % NPrint == 0):
+                print("Generation:", generation,"Monkies so far ","".join(population[0].chromosome), "Fitness: ",population[0].fitness,"/",len(Goal))
 
             generation += 1
 
@@ -155,9 +153,14 @@ class Individual():
             population[0].fitness)) 
   
 if __name__ == '__main__': 
-    #pop = input("how many monkies can you afford?")
-    Goal = input("what you wanna out of the monkeys foo")
-    #crossOver = input("How colaborative are the monkies?")
-    #Nprint = input("how often should you check up on the monkies?")
+    Pop = input("how many monkies can you afford? (big = better)")
+    Goal = input("what you wanna out of the monkeys fir (some txt)")
+    crossover = input("How colaborative are the monkies?(0.01 to 0.99)")
+    crossOver = 1-float(crossover)
+    np = input("how often should you check up on the monkies?(some int)")
+    NPrint=int(np)
     f=Individual("test")
     f.main() 
+
+
+
