@@ -1,17 +1,31 @@
 import random
 
-
 Genes = '''abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890, .-;:_!"#%&/()=?@${[]}'''
 
-class typingMonkey():
+# Number of individuals in each generation 
+Pop = 500
+  
+# Target string to be generated 
+Goal = "plzzzzzz"
+
+#crossover chance of genes
+crossOver =.9
+
+#how many generations between prints
+NPrint=2 
     
-    def __init__(self,nGen=1,cFactor=.5,mutationF = .10,userString = "HelloWorld",pop = 500):
+class Individual(): 
+    #Class representing individual in population 
+    def __init__(self,chromo,nGen=1,cFactor=.5,mutationF = .10,userString = "HelloWorld",pop = 500): 
+        self.chromosome = chromo  
+        self.fitness = self.cal_fitness()
+        self.fitness = self.cal_fitness()
         self.nPrint = nGen
         self.CrossoverFactor =cFactor
-        self.chromosome = ""
         self.mutationFactor=1-mutationF
         self.goalState=userString
         self.populationSize = pop
+
     
     def setMutationFactor(self,newM):
         self.mutationFactor= 1-newM
@@ -36,27 +50,7 @@ class typingMonkey():
         
     def getNprint(self):
         return self.nPrint
-    
-f= typingMonkey()
 
-# Number of individuals in each generation 
-Pop = f.getPopSize()
-  
-# Target string to be generated 
-Goal = f.getGoalState()
-
-#crossover chance of genes
-crossOver =f.getMutationFactor()
-
-#how many generations between prints
-NPrint=f.getNprint()
-  
-class Individual(typingMonkey): 
-    #Class representing individual in population 
-    def __init__(self, chromosome): 
-        self.chromosome = chromosome  
-        self.fitness = self.cal_fitness() 
-  
     @classmethod
     def mutated_genes(self): 
         #create random genes for mutation 
@@ -78,11 +72,11 @@ class Individual(typingMonkey):
             prob = random.random() 
   
             # insert gene from parent 1  
-            if prob < crossOver/2: 
+            if prob < self.CrossoverFactor/2: 
                 child_chromosome.append(gp1) 
   
             # insert gene from parent 2 
-            elif prob < crossOver: 
+            elif prob < self.CrossoverFactor: 
                 child_chromosome.append(gp2) 
   
             # otherwise insert random gene(mutate),  
@@ -104,63 +98,66 @@ class Individual(typingMonkey):
         return fitness 
   
 # Driver code 
-def main():   
-    #current generation 
-    generation = 1
-  
-    found = False
-    population = [] 
-  
-    # create initial population 
-    for _ in range(Pop): 
-                gnome = Individual.create_gnome() 
-                population.append(Individual(gnome)) 
-  
-    while not found: 
-  
-        # sort the population in increasing order of fitness score 
-        population = sorted(population, key = lambda x:x.fitness) 
-  
-        # if the individual having lowest fitness score ie.  
-        # 0 then we know that we have reached to the target 
-        # and break the loop 
-        if population[0].fitness <= 0: 
-            found = True
-            break
-  
-        # Otherwise generate new offsprings for new generation 
-        new_generation = [] 
-  
-        # Perform Elitism, that mean 10% of fittest population 
-        # goes to the next generation 
-        s = int((10*Pop)/100) 
-        new_generation.extend(population[:s]) 
-  
-        # From 50% of fittest population, Individuals  
-        # will mate to produce offspring 
-        s = int((90*Pop)/100) 
-        for _ in range(s): 
-            parent1 = random.choice(population[:50]) 
-            parent2 = random.choice(population[:50]) 
-            child = parent1.mate(parent2) 
-            new_generation.append(child) 
-      
-        population = new_generation 
-        if(generation % NPrint == 0):
-            print("Generation: {}\tString: {}\tFitness: {}". 
-                  format(generation, 
-                  "".join(population[0].chromosome), 
-                  population[0].fitness)) 
-  
-        generation += 1
-  
-      
-    print("Generation: {}\tString: {}\tFitness: {}".
-        format(generation, 
-        "".join(population[0].chromosome), 
-        population[0].fitness)) 
+    def main(self):   
+        #current generation 
+        generation = 1
+
+        found = False
+        population = [] 
+
+        # create initial population 
+        for _ in range(self.populationSize): 
+                    gnome = self.create_gnome() 
+                    population.append(Individual(gnome)) 
+
+        while not found: 
+
+            # sort the population in increasing order of fitness score 
+            population = sorted(population, key = lambda x:x.fitness) 
+
+            # if the individual having lowest fitness score ie.  
+            # 0 then we know that we have reached to the target 
+            # and break the loop 
+            if population[0].fitness <= 0: 
+                found = True
+                break
+
+            # Otherwise generate new offsprings for new generation 
+            new_generation = [] 
+
+            # Perform Elitism, that mean 10% of fittest population 
+            # goes to the next generation 
+            s = int((10*self.populationSize)/100) 
+            new_generation.extend(population[:s]) 
+
+            # From 50% of fittest population, Individuals  
+            # will mate to produce offspring 
+            s = int((90*self.populationSize)/100) 
+            for _ in range(s): 
+                parent1 = random.choice(population[:50]) 
+                parent2 = random.choice(population[:50]) 
+                child = parent1.mate(parent2) 
+                new_generation.append(child) 
+
+            population = new_generation 
+            if(generation % self.nPrint == 0):
+                print("Generation: {}\tString: {}\tFitness: {}". 
+                      format(generation, 
+                      "".join(population[0].chromosome), 
+                      population[0].fitness)) 
+
+            generation += 1
+
+
+        print("Generation: {}\tString: {}\tFitness: {}".
+            format(generation, 
+            "".join(population[0].chromosome), 
+            population[0].fitness)) 
   
 if __name__ == '__main__': 
-    main() 
-
-
+    #pop = input("how many monkies can you afford?")
+    Goal = input("what you wanna out of the monkeys foo")
+    #crossOver = input("How colaborative are the monkies?")
+    #Nprint = input("how often should you check up on the monkies?")
+    f=Individual("test")
+    f.main() 
