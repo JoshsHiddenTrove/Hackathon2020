@@ -8,10 +8,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
 <div class="jumbotron text-center">
-  <h1>Monkey Typewritter</h1>
+  <h1>Monkey <img src="type.gif" alt="W3Schools.com">Typewritter</h1>
 
 </div>
 <style>
@@ -33,120 +34,131 @@
 
 </style>
 
+<style>
+  .slidecontainer {
+    
+width: 100%;
+
+    padding: 5%
+  }
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+
 
 <div class="row">
     <div class = "column">
-        <form action="/action_page.php">
+        <form>
         <div class="form-group">
             <textarea class="form-control" rows = 15 style = width:100% placeholder = "Enter text for monkey to type" id="input" name="text"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-primary" id = "submit">Submit</button>
 
+    </div>
+    <script>
+      function repeat()
+      {
+        document.getElementById('output').value = document.getElementById('input').value
+      }
+    </script>
+
+    
 
     <div class = "column">
-        <form action="/action_page.php">
-            <div class="form-group">
-                 <textarea disabled = "disabled" class="form-control" rows = 15 style = width:100%></textarea>
+            <div class="form-group">     
+                <textarea disabled = "disabled" class="form-control" rows = 15 style = width:100% id="output"></textarea>
+
+    
             </div>
+            <div class="slidecontainer">
+              <input type="range" min="50" max="50000" value="25000" class="slider" name="num_monkeys">
+              <p>Number of Monkeys: <span id="demo3"></span></p>
+          </div>
+          
+          <script>
+              var slider3 = document.getElementByName("num_monkeys");
+              var output3 = document.getElementById("demo3");
+              output3.innerHTML = slider3.value;
+              
+              slider3.oninput = function() {
+                  output3.innerHTML = this.value;
+              }
+          </script>
+          
+          <div class = "row">
+              <div class = "column">
+                   <div class="slidecontainer">
+                      <input type="range" min=".1" max=".5" value=".25" step=".01" class="slider" name="mutation">
+                      <p>Mutation Factore: <span id="demo"></span></p>
+                   </div>
+                
+                  <script>
+                      var slider = document.getElementByName("mutation");
+                      var output = document.getElementById("demo");
+                      output.innerHTML = slider.value;
+                
+                      slider.oninput = function() {
+                      output.innerHTML = this.value;
+                      }
+                </script>
+              </div>
+          
+              <div class = "column">
+                  <div class="slidecontainer">
+                      <input type="range" min="1" max="1000" value="10" class="slider" name="interval">
+                      <p>Progress Interval (Generations): <span id="demo2"></span></p>
+                  </div>
+              
+                  <script>
+                      var slider2 = document.getElementByName("interval");
+                      var output2 = document.getElementById("demo2");
+                      output2.innerHTML = slider2.value;
+                      
+                      slider2.oninput = function() {
+                          output2.innerHTML = this.value;
+                      }
+                 </script>
+              </div>
+          </div>
         </form>
     </div>
 </div>
 
 
 
-  <style>
-    .slidecontainer {
-      
-width: 100%;
 
-      padding: 5%
-    }
-  .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 15px;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-  .slider:hover {
-    opacity: 1;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
-  }
-  </style>
 
-<div class="slidecontainer">
-    <input type="range" min="50" max="50000" value="25000" class="slider" id="myRange3">
-    <p>Number of Monkeys: <span id="demo3"></span></p>
-</div>
 
-<script>
-    var slider3 = document.getElementById("myRange3");
-    var output3 = document.getElementById("demo3");
-    output3.innerHTML = slider3.value;
-    
-    slider3.oninput = function() {
-        output3.innerHTML = this.value;
-    }
-</script>
-
-<div class = "row">
-    <div class = "column">
-         <div class="slidecontainer">
-            <input type="range" min=".1" max=".5" value=".25" step=".01" class="slider" id="myRange">
-            <p>Mutation Factore: <span id="demo"></span></p>
-         </div>
-      
-        <script>
-            var slider = document.getElementById("myRange");
-            var output = document.getElementById("demo");
-            output.innerHTML = slider.value;
-      
-            slider.oninput = function() {
-            output.innerHTML = this.value;
-            }
-      </script>
-    </div>
-
-    <div class = "column">
-        <div class="slidecontainer">
-            <input type="range" min="1" max="1000" value="10" class="slider" id="myRange2">
-            <p>Progress Interval (Generations): <span id="demo2"></span></p>
-        </div>
-    
-        <script>
-            var slider2 = document.getElementById("myRange2");
-            var output2 = document.getElementById("demo2");
-            output2.innerHTML = slider2.value;
-            
-            slider2.oninput = function() {
-                output2.innerHTML = this.value;
-            }
-       </script>
-    </div>
-</div>
   </body>
   </html>
